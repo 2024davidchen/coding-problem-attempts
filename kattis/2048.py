@@ -25,10 +25,28 @@ def move(numList):
 
 def compile(numList):
     for i in range(4):
+        move(numList)
         if numList[i] == numList[i + 1]:
             numList[i] *= 2
             numList[i + 1] = 0
             numList = move(numList)
+            numLIst = compile(numList)
     return numList
 
-if 
+
+def left(gameBoard):
+    for i in range(4):
+        gameBoard[i] = compile(gameBoard[i])
+    return gameBoard
+
+def up(gameBoard):
+    for i in range(4):
+        column1, column2, column3, column4 = [0, 0, 0, 0]
+        for j in range(4):
+
+
+def right(gameBoard):
+
+
+def down(gameBoard):
+
