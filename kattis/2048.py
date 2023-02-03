@@ -1,4 +1,4 @@
-# Status: In Progress
+# Status: Complete
 # https://open.kattis.com/problems/2048
 # Takes the first 4 lines of input and returns a 2D array representing the 2048 board
 def makeBoard(line1, line2, line3, line4):
@@ -43,18 +43,42 @@ def left(gameBoard):
     return boardCopy
 
 def up(gameBoard):
+    boardCopy = gameBoard
     for i in range(4):
-        column1, column2, column3, column4 = [0, 0, 0, 0]
+        column = [0, 0, 0, 0]
         for j in range(4):
-            pass
-
+            column[j] = boardCopy[j][i]
+        column = compile(column)
+        for j in range(4):
+            boardCopy[j][i] = column[j]
+    return boardCopy
 
 def right(gameBoard):
-    pass
+    boardCopy = gameBoard
+    for i in range(4):
+        # Reverses to compile then reverses again to get it in the right order
+      temp = boardCopy[i]
+      temp.reverse()
+      temp = compile(temp)
+      temp.reverse()
+      boardCopy[i] = temp
+    return boardCopy
 
 def down(gameBoard):
-    pass
+    boardCopy = gameBoard
+    for i in range(4):
+        column = [0, 0, 0, 0]
+        for j in range(4):
+            column[j] = boardCopy[j][i]
+        column.reverse()  
+        column = compile(column)
+        for j in range(4):
+            boardCopy[3 - j][i] = column[j]
+    return boardCopy
 
+def printBoard(gameBoard):
+    for row in gameBoard:
+        print(str(row[0]) + " " + str(row[1]) + " " + str(row[2]) + " " + str(row[3]))
 
 if __name__ == '__main__':
     line1 = input()
@@ -62,4 +86,12 @@ if __name__ == '__main__':
     line3 = input()
     line4 = input()
     board = makeBoard(line1, line2, line3, line4)
-    print(left(board))
+    direction = int(input())
+    if direction == 0:
+        printBoard(left(board))
+    if direction == 1:
+        printBoard(up(board))
+    if direction == 2:
+        printBoard(right(board))
+    if direction == 3:
+        printBoard(down(board))
